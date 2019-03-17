@@ -2,44 +2,66 @@
 module.exports = function makeExchange(currency) {
     // Your code goes here!
     // Return an object containing the minimum number of coins needed to make change
-    let H, Q, D, N, P;
-    H,Q,D,N,P = 0
-    let answer = {}
+    let H = 0;
+    let Q = 0; 
+    let D = 0;
+    let N = 0;
+    let P = 0;
     
-    function curUnit(name, nominale, currency) { //функция для рассчета количества монет для выдачи
+    let answer = {}
+    //answer['H'] = H
+    
+    function curUnit(name, nominale) { //функция для рассчета количества монет для выдачи
       while (currency >= nominale) {
         currency -= nominale
         name++
-      return name, currency   //возвращает сколько монет номинала влазит в общую сумму
+      //return name   //возвращает сколько монет номинала влазит в общую сумму
       }
     }
     
+
+
     if (currency > 10000) {
       answer['error'] = "You are rich, my friend! We don't have so much coins for exchange"
     }
     else if (currency > 0) {
       while(currency > 0) {
-        H, currency = curUnit(H,50,currency)
+        while (currency >= 50) {
+          currency -= 50
+          H++
+        }
         if (H > 0) {
           answer['H'] = H
         }
 
-        Q, currency = curUnit(Q,25,currency)
+        while (currency >= 25) {
+          currency -= 25
+          Q++
+        }
         if (Q > 0) {
           answer['Q'] = Q
         }
 
-        D, currency = curUnit(D,10,currency)
+        while (currency >= 10) {
+          currency -= 10
+          D++
+        }
         if (D > 0) {
           answer['D'] = D;
         }
 
-        N, currency = curUnit(N,5,currency)
+        while (currency >= 5) {
+          currency -= 5
+          N++
+        }
         if (N > 0) {
           answer['N'] = N;
         }
 
-        P, currency = curUnit(P,1,currency)
+        while (currency >= 1) {
+          currency -= 1
+          P++
+        }
         if (P > 0) {
           answer['P'] = P;
         }
@@ -48,11 +70,6 @@ module.exports = function makeExchange(currency) {
     
     //answer = {"H":H, "Q":Q, "D":D, "N":N, "P":P}
     //{error: "You are rich, my friend! We don't have so much coins for exchange"}
-    function print(answer) {
-      for (let key in answer) {
-        key + answer[key] + '\n';
-      }
-    }
-    
-    return print(answer);
+    //print(answer);
+    return answer;
 }
